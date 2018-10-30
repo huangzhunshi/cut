@@ -1,0 +1,56 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>
+        excel文件拆分工具(在线版)
+    </title>
+    <!--https://github.com/SheetJS/js-xlsx/tree/v0.14.0 官网-->
+    <!--https://www.cnblogs.com/sunshq/p/6019867.html demo-->
+<script language="JavaScript" src="js/jszip.js"></script>
+<script language="JavaScript" src="js/xlsx.min.js"></script>
+    <script language="JavaScript">
+        function excelload(obj) {
+//            document.getElementById("file_excel").onclick
+            var excel_path= obj.value();
+            alert(excel_path)
+        }
+
+        //js 读取文件
+        function jsReadFiles(files) {
+           var a=document.getElementById("file1").files[0];
+           alert(a.name);
+           alert(a.size);
+//            alert(files.length);
+//            var file=files[0];
+//            alert(file.value)
+//            if (files.length) {
+//                var file = files[0];
+//                var reader = new FileReader();//new一个FileReader实例
+//                if (/text+/.test(file.type)) {//判断文件类型，是不是text类型
+//                    reader.onload = function() {
+//                        alert(this.result)
+////                        $('body').append('<pre>' + this.result + '</pre>');
+//                    }
+//                    reader.readAsText(file);
+//                } else if(/image+/.test(file.type)) {//判断文件是不是imgage类型
+//                    reader.onload = function() {
+//                        alert(this.result)
+////                        $('body').append('<img src="' + this.result + '"/>');
+//                    }
+//                    reader.readAsDataURL(file);
+//                }
+//            }
+        }
+    </script>
+
+</head>
+
+<body>
+xxxx黄准
+<form>
+    <input type="file" id="file1" onchange="jsReadFiles(this.files)"/>
+    <!--<input type="file" id="file_excel" name="file_excel"  onchange="excelload(this)" alt="excle文件上传">-->
+</form>
+</body>
+
+</html>

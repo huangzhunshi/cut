@@ -10,4 +10,10 @@ public class HiController {
     public String hello(){
         return "hello";
     }
+
+
+    private void test(){
+        System.out.println("测试下代码");
+    }
+
 }

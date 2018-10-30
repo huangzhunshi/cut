@@ -11,9 +11,4 @@ public class HiController {
         return "hello";
     }
 
-
-    private void test(){
-        System.out.println("测试下代码");
-    }
-
 }

@@ -32,7 +32,7 @@
                 var a='';
                 for(var j in packJson[i]){
                     //a+= '   '+j;
-                   a+='  '+ packJson[i][j]
+                    a+='  '+ packJson[i][j]
                 }
                 alert(a);
             }
@@ -67,7 +67,7 @@
                 var jsonstr=JSON.stringify(XLSX.utils.sheet_to_json(zzexcel.Sheets[zzexcel.SheetNames[i]]));
                 document.getElementById("zzdemo").innerHTML +=jsonstr;
                 var jsonobj=eval('(' + jsonstr + ')');
-              //  alert(jsonobj.length);
+                //  alert(jsonobj.length);
                 for(var n in jsonobj){
                     var a="";
                     for(var m in jsonobj[n]){

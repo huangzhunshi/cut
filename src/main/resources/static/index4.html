@@ -1,0 +1,53 @@
+<html>
+
+<head>
+    <title></title>
+    <div id="json" style="width:100%;height:50px;background-color:yellow">
+
+    </div>
+
+    <script>
+
+        var  params = [];
+        for(var i = 0; i < 3; i++){
+            var param = [];
+            param.push("one");
+            param.push("two");
+            param.push("three");
+            params.push({"group":i,"param":param});
+        }
+
+        var json = JSON.stringify(params);
+        //alert(json);
+
+        var jsonElem = document.getElementById("json");
+        jsonElem.innerHTML = json;
+
+
+        function test() {
+            var jsonarray=[];
+            for(var i=0;i<2;i++){
+
+               jsonarray.push({"name":"huangzhun","age":18});
+            }
+
+            alert(JSON.stringify(jsonarray));
+           // document.getElementById("json2").innerHTML=JSON.stringify(jsonarray);
+
+        }
+        test();
+    </script>
+
+    <!--
+        组成的json串：
+        [{"group":0,"param":["one","two","three"]},{"group":1,"param":["one","two","three"]},{"group":2,"param":["one","two","three"]}]
+    -->
+</head>
+
+<body>
+<span id="json"></span>
+
+<span id="json2"></span>
+
+</body>
+</html>

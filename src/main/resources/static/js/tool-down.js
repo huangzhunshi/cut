@@ -35,10 +35,25 @@ function saveAs(obj, fileName) {//当然可以自定义简单的下载文件实�
     var tmpa = document.createElement("a");
     tmpa.download = fileName || "下载";
     tmpa.href = URL.createObjectURL(obj); //绑定a标签
-    tmpa.click(); //模拟点击实现下载
+    //tmpa.click(); //模拟点击实现下载
+    testclick(tmpa);
     setTimeout(function () { //延时释放
         URL.revokeObjectURL(obj); //用URL.revokeObjectURL()来释放这个object URL
     }, 100);
+}
+
+function testclick(obj)
+{
+    if(document.all)
+    {
+        obj.click();
+    }
+    else
+    {
+        var evt = document.createEvent("MouseEvents");
+        evt.initEvent("click", true, true);
+        obj.dispatchEvent(evt);
+    }
 }
 
 function s2ab(s) {

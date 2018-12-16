@@ -42,6 +42,10 @@ function saveAs(obj, fileName) {//当然可以自定义简单的下载文件实�
     }, 100);
 }
 
+/***
+ * 下载兼容性 兼容火狐
+ * @param obj
+ */
 function testclick(obj)
 {
     if(document.all)

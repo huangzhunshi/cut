@@ -1,0 +1,91 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script language="JavaScript" src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/xlsx.full.min.js"></script>
+
+    <script language="JavaScript" src="js/tool-show.js"></script>
+
+    <script language="JavaScript" src="js/tool-jsonhand.js"></script>
+
+    <script language="JavaScript" src="js/tool-down.js"></script>
+
+    <script language="JavaScript">
+
+
+        function cutrun() {
+            //alert(jsonstr);
+            var selectgroup= $("input[name='select_group']:checked").val()+"";
+            console.log(selectgroup);
+            if(selectgroup=="1"){
+                var selectgroupcolumn= $("input[name='radio_group_column']:checked").val();
+                console.log(selectgroupcolumn);
+                if(typeof(selectgroupcolumn)=="undefined"|| selectgroupcolumn==""){
+                    alert("请选择要分组的列名");
+                    return;
+                }
+                var map= jsonbyGroupStringArray(jsonObject,selectgroupcolumn)
+                tojsondwon(map,fname);
+                return;
+
+            }
+            if(selectgroup=="2"){
+                var size=$("#txt_size").val()+"";
+
+                if(isNaN(size)||size==""){
+                    alert("请输入数字");
+                    return;
+                }
+                console.log(size);
+                var map= jsonBySizeStringArray(jsonObject,size)
+                tojsondwon(map,fname);
+                return;
+            }
+
+        }
+
+
+
+    </script>
+
+</head>
+<body>
+
+<!--<textarea id="hidjsonstr"></textarea>-->
+<!--<input type="hidden" id="hidjsonstr"/>-->
+
+<input type="file" onchange="sendfile(this)"/>
+
+<div id="div_tool" style="display: none">
+<div>
+    <input type="radio" name="select_group" onclick="selectgroupradio(this);" value="1"/>分组切割
+
+    <input type="radio" name="select_group" onclick="selectgroupradio(this);"  value="2"/>数量切割
+</div>
+
+<div id="div_value_1" style="display: none">
+    请选择拆分列
+    <div id="div_group_column">
+        <ul>
+            <li>xxx</li>
+            <li>xxx</li>
+            <li>xxx</li>
+
+        </ul>
+    </div>
+    <div>
+        <input type="button" value="切割" onclick="cutrun()">
+    </div>
+</div>
+
+<div id="div_value_2" style="display: none">
+    <div>
+    请选择拆分的数量:<input type="text" name="txt_size" id="txt_size"/>
+    </div>
+    <div>
+        <input type="button" value="切割" onclick="cutrun()">
+    </div>
+</div>
+</div>
+</body>
+</html>

@@ -32,12 +32,20 @@ var jsonstr="";
  */
 var fname="";
 
+/**
+ * excel json对象，全局
+ */
+var jsonObject=null;
 /***
  * 加载上传的文件
  * @param obj input file 对象
  */
 function sendfile(obj) {
+
+    jsonstr="";
+    jsonObject=null;
     $("#div_tool").hide();
+
     if(!obj.files) {
         return;
     }
@@ -48,12 +56,13 @@ function sendfile(obj) {
     if(typeof(f)=="undefined"){
         return;
     }
-    console.log(f);
+
+
+    // console.log(f);
 
 
     fname= f.name.split('.')[0];
     var ext=f.name.split('.').pop().toLowerCase();
-    console.log(ext);
     if(ext!="xls" && ext!="xlsx"){
         fname="";
         ext=""
@@ -78,10 +87,7 @@ function sendfile(obj) {
 
 }
 
-/**
- * excel json对象，全局
- */
-var jsonObject=null;
+
 
 
 function showolumn(jsonstr) {

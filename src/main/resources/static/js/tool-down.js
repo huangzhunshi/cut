@@ -1,5 +1,5 @@
 /***
- * 下载excel文件
+ * 下载excel文件 多个单文件
  * @param jsonStringMap 分组文件
  * @param fname 文件名称
  */
@@ -20,6 +20,40 @@ function tojsondwon(jsonStringMap,fname) {
         downloadExl(jsonObject,fname+"-"+k);
 
     }
+}
+
+/***
+ * 下周excel文件，多个sheet一个文件
+ * @param jsonStringMap
+ * @param fname
+ */
+function tojsondwonByOne(jsonStringMap,fname) {
+    if(fname==""){
+        alert("请上传文件");
+        return;
+    }
+    var sheets=[];
+
+    for(k in jsonStringMap){
+        sheets.push(k);
+    }
+    // console.log(sheets);
+    const wopts = { bookType: 'xlsx', bookSST: false, type: 'binary' };//这里的数据是用来定义导出的格式类型
+    const wb = { SheetNames: sheets, Sheets: {}, Props: {} };
+    for(k in jsonStringMap){
+        var linestr=jsonStringMap[k];
+        linestr=linestr.substring(0,linestr.length-1);
+        linestr="["+linestr+"]";
+        //console.log(linestr);
+
+        var jsonObject= jQuery.parseJSON(linestr);
+
+        wb.Sheets[k] = XLSX.utils.json_to_sheet(jsonObject);//通过json_to_sheet转成单页(Sheet)数据
+
+    }
+    saveAs(new Blob([s2ab(XLSX.write(wb, wopts))], { type: "application/octet-stream" }), fname + '-cut.' + (wopts.bookType=="biff2"?"xls":wopts.bookType));
+
+    return;
 }
 
 

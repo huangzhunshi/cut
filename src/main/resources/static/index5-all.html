@@ -16,16 +16,18 @@
         function cutrun() {
             //alert(jsonstr);
             var selectgroup= $("input[name='select_group']:checked").val()+"";
-            console.log(selectgroup);
+//            console.log(selectgroup);
             if(selectgroup=="1"){
                 var selectgroupcolumn= $("input[name='radio_group_column']:checked").val();
-                console.log(selectgroupcolumn);
                 if(typeof(selectgroupcolumn)=="undefined"|| selectgroupcolumn==""){
                     alert("请选择要分组的列名");
                     return;
                 }
                 var map= jsonbyGroupStringArray(jsonObject,selectgroupcolumn)
-                tojsondwon(map,fname);
+     //           tojsondwon(map,fname);
+//
+//                tojsondwonByOne(map,fname);
+                jsondwon(map,fname);
                 return;
 
             }
@@ -38,10 +40,20 @@
                 }
                 console.log(size);
                 var map= jsonBySizeStringArray(jsonObject,size)
-                tojsondwon(map,fname);
+                jsondwon(map,fname);
                 return;
             }
 
+        }
+
+        function jsondwon(map,fname) {
+            var selectgroup= $("input[name='rad_cut_type']:checked").val()+"";
+            if(selectgroup=="sheetcut"){
+                tojsondwonByOne(map,fname);
+            }
+            if(selectgroup=="filecut"){
+                tojsondwon(map,fname);
+            }
         }
 
 
@@ -55,6 +67,11 @@
 <!--<input type="hidden" id="hidjsonstr"/>-->
 
 <input type="file" onchange="sendfile(this)"/>
+<div>
+    切分方式:
+    <input type="radio" name="rad_cut_type" value="sheetcut" checked="checked" /> 分拆多个sheet
+    <input type="radio" name="rad_cut_type" value="filecut" /> 分拆多个文件
+</div>
 
 <div id="div_tool" style="display: none">
 <div>
@@ -74,7 +91,7 @@
         </ul>
     </div>
     <div>
-        <input type="button" value="切割" onclick="cutrun()">
+        <input type="button" value="切一下" onclick="cutrun()">
     </div>
 </div>
 
@@ -83,7 +100,8 @@
     请选择拆分的数量:<input type="text" name="txt_size" id="txt_size"/>
     </div>
     <div>
-        <input type="button" value="切割" onclick="cutrun()">
+
+        <input type="button" value="切一下" onclick="cutrun()">
     </div>
 </div>
 </div>

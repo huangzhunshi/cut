@@ -69,6 +69,8 @@ function sendfile(obj) {
         alert("请上传 xls或者xlsx类型的文件");
         return;
     }
+    //显示加载excel提示
+    $("#div_excel_loading").show();
 
     var reader = new FileReader();
     reader.readAsBinaryString(f);
@@ -110,5 +112,7 @@ function showolumn(jsonstr) {
     }
     grouphtml+="</ul>";
     $("#div_tool").show();
+    $("#div_excel_loading").hide();
+
     $("#div_group_column").html(grouphtml);
 }

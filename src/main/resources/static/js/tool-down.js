@@ -12,7 +12,10 @@ function tojsondwon(jsonStringMap,fname) {
     for(k in jsonStringMap){
         var linestr=jsonStringMap[k];
         linestr=linestr.substring(0,linestr.length-1);
+        //linestr=linestr.replace(/\n/g,"");
+        linestr=linestr.replace(/\s+/g,"");
         linestr="["+linestr+"]";
+
         //console.log(linestr);
 
         var jsonObject= jQuery.parseJSON(linestr);
@@ -43,13 +46,20 @@ function tojsondwonByOne(jsonStringMap,fname) {
     for(k in jsonStringMap){
         var linestr=jsonStringMap[k];
         linestr=linestr.substring(0,linestr.length-1);
+        //linestr=linestr.replace(/\n/g,"");
+        linestr=linestr.replace(/\s+/g,"");
+
         linestr="["+linestr+"]";
         //console.log(linestr);
+        try{
 
         var jsonObject= jQuery.parseJSON(linestr);
 
         wb.Sheets[k] = XLSX.utils.json_to_sheet(jsonObject);//通过json_to_sheet转成单页(Sheet)数据
-
+        }catch (err){
+            console.log(err);
+            console.log(linestr);
+        }
     }
     saveAs(new Blob([s2ab(XLSX.write(wb, wopts))], { type: "application/octet-stream" }), fname + '-cut.' + (wopts.bookType=="biff2"?"xls":wopts.bookType));
 

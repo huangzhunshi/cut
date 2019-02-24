@@ -71,14 +71,14 @@
 </div>
 <div class="line0"></div>
 <div class="bgselect">
-    <div class="file-box"><input type="file" class="file-btn" onchange="sendfile(this)"/>选择你想要上传的文件</div>
-    <div class="bgstest"> xxx</div>
+    <div class="file-box"><input type="file" class="file-btn" onchange="sendfileUI(this)"/>选择你想要上传的文件</div>
+    <div class="bgstest" id="fileShowName"> </div>
     <div id="div_excel_loading" style="display: none">
         正在读取excel，请稍后...
     </div>
 </div>
 <div class="Segmen">
-    <div class="stit">切分方式</div>
+    <div class="stit">文件分拆方式</div>
     <!--<input type="radio" name="rad_cut_type" value="sheetcut" checked="checked" /> 分拆多个sheet-->
     <!--<input type="radio" name="rad_cut_type" value="filecut" /> 分拆多个文件-->
     <div class="stegm">
@@ -94,16 +94,19 @@
 
             <span class="btn active">分拆多个文件</span>
         </div>
+
         <div id="div_tool" style="display: none">
+            <div class="stit">切分方式</div>
+
             <div class="male fl">
 
                 <input type="radio" name="select_group" onclick="selectgroupradio(this);" value="1"/><!--分组切割-->
 
-                <span class="btn active">分组切割</span>
+                <span class="btn active">分组切分</span>
             </div>
             <div class="male fl" style="float:right;">
                 <input type="radio" name="select_group" onclick="selectgroupradio(this);" value="2"/><!--数量切割-->
-                <span class="btn active">数量切割</span>
+                <span class="btn active">数量切分</span>
             </div>
         </div>
 
@@ -126,7 +129,7 @@
 
     <div id="div_value_2" style="display: none">
 
-        <div class="stit">请选择拆分的数量:<input type="text" name="txt_size" id="txt_size"/></div>
+        <div class="stit">请输入每页的数量:<input type="text" name="txt_size" id="txt_size"/></div>
         <!--<div class="stbanyua" id="div_group_column">-->
             <!--<ul>-->
                 <!--<li>xxxx</li>-->

@@ -6,20 +6,20 @@
     </title>
     <!--https://github.com/SheetJS/js-xlsx/tree/v0.14.0 官网-->
     <!--https://www.jianshu.com/p/74d405940305 demo-->
-<script language="JavaScript" src="js/jszip.js"></script>
-<script language="JavaScript" src="js/xlsx.min.js"></script>
+    <script language="JavaScript" src="js/jszip.js"></script>
+    <script language="JavaScript" src="js/xlsx.min.js"></script>
     <script language="JavaScript">
         function excelload(obj) {
 //            document.getElementById("file_excel").onclick
-            var excel_path= obj.value();
+            var excel_path = obj.value();
             alert(excel_path)
         }
 
         //js 读取文件
         function jsReadFiles(files) {
-           var a=document.getElementById("file1").files[0];
-           alert(a.name);
-           alert(a.size);
+            var a = document.getElementById("file1").files[0];
+            alert(a.name);
+            alert(a.size);
 //            alert(files.length);
 //            var file=files[0];
 //            alert(file.value)

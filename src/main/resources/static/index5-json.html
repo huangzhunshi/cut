@@ -6,27 +6,28 @@
 
     <script language="JavaScript">
 
-        var jsonstr="[{\"用户\":\"小李A\",\"部门\":\"A\"},{\"用户\":\"小白B\",\"部门\":\"B\"},{\"用户\":\"小红C\",\"部门\":\"C\"},{\"用户\":\"小虫\",\"部门\":\"C\"}]\n";
+        var jsonstr = "[{\"用户\":\"小李A\",\"部门\":\"A\"},{\"用户\":\"小白B\",\"部门\":\"B\"},{\"用户\":\"小红C\",\"部门\":\"C\"},{\"用户\":\"小虫\",\"部门\":\"C\"}]\n";
 
- //       var c="[{'用户':'小李A','部门':'A'}]";
+        //       var c="[{'用户':'小李A','部门':'A'}]";
 
-        var jsonObject= jQuery.parseJSON(jsonstr);
-//        console.log(jsonObject);
+        var jsonObject = jQuery.parseJSON(jsonstr);
+
+        //        console.log(jsonObject);
 
 
-        function jsonBySizeStringArray(jsonObject,size) {
-            var  jsonStringMap={};
-            for(var k in jsonObject ){
+        function jsonBySizeStringArray(jsonObject, size) {
+            var jsonStringMap = {};
+            for (var k in jsonObject) {
 
-                var strline=getjsonstrbysize(jsonObject[k],k,size);
+                var strline = getjsonstrbysize(jsonObject[k], k, size);
                 //console.log(strline);
 
-                var row=strline[0]+",";
-                var cname=strline[1];
-                if(cname in jsonStringMap)
-                    jsonStringMap[cname]+=row;
+                var row = strline[0] + ",";
+                var cname = strline[1];
+                if (cname in jsonStringMap)
+                    jsonStringMap[cname] += row;
                 else
-                    jsonStringMap[cname]=row;
+                    jsonStringMap[cname] = row;
 
 
             }
@@ -37,19 +38,19 @@
         /**
          *  将json 文件进行字段分组，产生多个json字符串数组
          */
-        function jsonbyGroupStringArray(jsonObject,group) {
-            var  jsonStringMap={};
-            for(var k in jsonObject ){
+        function jsonbyGroupStringArray(jsonObject, group) {
+            var jsonStringMap = {};
+            for (var k in jsonObject) {
 
-                var strline=getjsonstrrowbyc(jsonObject[k],group);
+                var strline = getjsonstrrowbyc(jsonObject[k], group);
                 //console.log(strline);
 
-                var row=strline[0]+",";
-                var cname=strline[1];
-                if(cname in jsonStringMap)
-                    jsonStringMap[cname]+=row;
+                var row = strline[0] + ",";
+                var cname = strline[1];
+                if (cname in jsonStringMap)
+                    jsonStringMap[cname] += row;
                 else
-                    jsonStringMap[cname]=row;
+                    jsonStringMap[cname] = row;
 
 
             }
@@ -59,49 +60,49 @@
 
         function tojsondwon(jsonStringMap) {
             console.log(jsonStringMap);
-            for(k in jsonStringMap){
-                var linestr=jsonStringMap[k];
-                linestr=linestr.substring(0,linestr.length-1);
-                linestr="["+linestr+"]";
+            for (k in jsonStringMap) {
+                var linestr = jsonStringMap[k];
+                linestr = linestr.substring(0, linestr.length - 1);
+                linestr = "[" + linestr + "]";
                 //console.log(linestr);
 
-                var jsonObject= jQuery.parseJSON(linestr);
+                var jsonObject = jQuery.parseJSON(linestr);
                 //console.log(jsonObject);
                 downloadExl(jsonObject);
 
             }
         }
 
-        function excelcat(jsonstr,group) {
-            var jsonObject= jQuery.parseJSON(jsonstr);
+        function excelcat(jsonstr, group) {
+            var jsonObject = jQuery.parseJSON(jsonstr);
 
-            var map=jsonbyGroupStringArray(jsonObject,group);
+            var map = jsonbyGroupStringArray(jsonObject, group);
             tojsondwon(map);
         }
 
-        function exclecatsize(jsonstr,size){
+        function exclecatsize(jsonstr, size) {
 
-            var jsonObject= jQuery.parseJSON(jsonstr);
+            var jsonObject = jQuery.parseJSON(jsonstr);
 
-            var map=jsonBySizeStringArray(jsonObject,size);
+            var map = jsonBySizeStringArray(jsonObject, size);
             tojsondwon(map);
         }
 
-        exclecatsize(jsonstr,3);
+        exclecatsize(jsonstr, 3);
         //excelcat(jsonstr,"部门");
 
 
-
         //        var map= jsonbyGroupStringArray(jsonObject,"部门");
-//        console.log(map);
+        //        console.log(map);
 
         function downloadExl(data, type) {
-            const wopts = { bookType: 'xlsx', bookSST: false, type: 'binary' };//这里的数据是用来定义导出的格式类型
+            const wopts = {bookType: 'xlsx', bookSST: false, type: 'binary'};//这里的数据是用来定义导出的格式类型
 
-            const wb = { SheetNames: ['Sheet1','Sheet2'], Sheets: {}, Props: {} };
+            const wb = {SheetNames: ['Sheet1', 'Sheet2'], Sheets: {}, Props: {}};
             wb.Sheets['Sheet1'] = XLSX.utils.json_to_sheet(data);//通过json_to_sheet转成单页(Sheet)数据
-            saveAs(new Blob([s2ab(XLSX.write(wb, wopts))], { type: "application/octet-stream" }), "这里是下载的文件名" + '.' + (wopts.bookType=="biff2"?"xls":wopts.bookType));
+            saveAs(new Blob([s2ab(XLSX.write(wb, wopts))], {type: "application/octet-stream"}), "这里是下载的文件名" + '.' + (wopts.bookType == "biff2" ? "xls" : wopts.bookType));
         }
+
         //如果使用 FileSaver.js 就不要同时使用以下函数
         function saveAs(obj, fileName) {//当然可以自定义简单的下载文件实现方式
             var tmpa = document.createElement("a");
@@ -130,41 +131,41 @@
         /**
          * 返回每一行的json 字符串,和分组列的值,根据数量分组
          */
-        function getjsonstrbysize(jsonrow,k,size) {
-            var index=parseInt(k/size)+1;
-            console.log(index+"--"+k+"---"+size);
-            var c=(index-1)*size+"-"+index*size;
+        function getjsonstrbysize(jsonrow, k, size) {
+            var index = parseInt(k / size) + 1;
+            console.log(index + "--" + k + "---" + size);
+            var c = (index - 1) * size + "-" + index * size;
 
-            var rowstr="{";
-            for(var jr in jsonrow){
+            var rowstr = "{";
+            for (var jr in jsonrow) {
 
-                rowstr+="\""+jr+"\":"+"\""+jsonrow[jr]+"\"";
-                rowstr+=",";
+                rowstr += "\"" + jr + "\":" + "\"" + jsonrow[jr] + "\"";
+                rowstr += ",";
             }
-            rowstr=rowstr.substring(0,rowstr.length-1);
-            rowstr+="}";
-            return [rowstr,c];
+            rowstr = rowstr.substring(0, rowstr.length - 1);
+            rowstr += "}";
+            return [rowstr, c];
 
         }
 
         /**
          * 返回每一行的json 字符串,和分组列的值
          */
-        function getjsonstrrowbyc(jsonrow,cname) {
-            var rowstr="{";
-            var c="";
-            for(var jr in jsonrow){
+        function getjsonstrrowbyc(jsonrow, cname) {
+            var rowstr = "{";
+            var c = "";
+            for (var jr in jsonrow) {
 
-                rowstr+="\""+jr+"\":"+"\""+jsonrow[jr]+"\"";
-                rowstr+=",";
-                if(jr+""==cname+""){
-                    c=jsonrow[jr];
+                rowstr += "\"" + jr + "\":" + "\"" + jsonrow[jr] + "\"";
+                rowstr += ",";
+                if (jr + "" == cname + "") {
+                    c = jsonrow[jr];
                 }
             }
-            rowstr=rowstr.substring(0,rowstr.length-1);
-            rowstr+="}";
+            rowstr = rowstr.substring(0, rowstr.length - 1);
+            rowstr += "}";
             //return rowstr;
-            return [rowstr,c];
+            return [rowstr, c];
 
         }
 
@@ -173,89 +174,88 @@
          * 返回每一行的json 字符串
          */
         function getjsonstrrow(jsonrow) {
-            var rowstr="{";
-            for(var jr in jsonrow){
+            var rowstr = "{";
+            for (var jr in jsonrow) {
 
-                rowstr+="'"+jr+"':"+"'"+jsonrow[jr]+"'";
-                rowstr+=",";
+                rowstr += "'" + jr + "':" + "'" + jsonrow[jr] + "'";
+                rowstr += ",";
             }
-            rowstr=rowstr.substring(0,rowstr.length-1);
-            rowstr+="}";
+            rowstr = rowstr.substring(0, rowstr.length - 1);
+            rowstr += "}";
 
             return rowstr;
         }
 
         function hahstest() {
-            var map={};
+            var map = {};
 //            map["A"]="aaaa";
 //            map["B"]="bbbbb";
 //            map["C"]="ccccc";
 //            map["A"]+="sdfdsfds";
-            if("A" in map){
-               map["A"]+="aaaa";
-            }else{
-               map["A"]="aaaaa";
+            if ("A" in map) {
+                map["A"] += "aaaa";
+            } else {
+                map["A"] = "aaaaa";
             }
 
-            if("B" in map){
-                map["B"]+="bbbb";
-            }else{
-                map["B"]="bbbbb";
+            if ("B" in map) {
+                map["B"] += "bbbb";
+            } else {
+                map["B"] = "bbbbb";
             }
 
-            if("A" in map){
-                map["A"]+="jjjjj";
-            }else{
-                map["A"]="jjjjj";
+            if ("A" in map) {
+                map["A"] += "jjjjj";
+            } else {
+                map["A"] = "jjjjj";
             }
 
             console.log(map);
-            for(var b in map){
-                console.log(b+"----"+map[b]);
+            for (var b in map) {
+                console.log(b + "----" + map[b]);
             }
         }
+
         hahstest();
 
-        for(var k in jsonObject ){//遍历packJson 对象的每个key/value对,k为key
+        for (var k in jsonObject) {//遍历packJson 对象的每个key/value对,k为key
             //alert(k + " " + jsonObject[k]["0"]);
             //alert(jsonObject[k]["用户"]);
             getjson(jsonObject[k]);
         }
-//
-//        for(var i in jsonObject){  //遍历packJson 数组时，i为索引
-//            //alert(packJson[i]);
-//            var a='';
-//            for(var j in jsonObject[i]){
-//                //a+= '   '+j;
-//                a+='  '+ jsonObject[i][j]
-//            }
-//            alert(a);
-//        }
+        //
+        //        for(var i in jsonObject){  //遍历packJson 数组时，i为索引
+        //            //alert(packJson[i]);
+        //            var a='';
+        //            for(var j in jsonObject[i]){
+        //                //a+= '   '+j;
+        //                a+='  '+ jsonObject[i][j]
+        //            }
+        //            alert(a);
+        //        }
 
 
-         /**
-          * 处理json行
-          */
+        /**
+         * 处理json行
+         */
         function getjson(jsonrow) {
-            for(var jr in jsonrow){
-               // alert(jsonrow[jr]+"---"+jr);
-                console.log(jsonrow[jr]+"---"+jr);
+            for (var jr in jsonrow) {
+                // alert(jsonrow[jr]+"---"+jr);
+                console.log(jsonrow[jr] + "---" + jr);
             }
         }
 
 
-        
-
-        function getjsonbygorup(jsonrow,gorup) {
-            for(var jr in jsonrow){
-                if(jr+""== gorup+""){
-                    alert(jsonrow[jr]+"---"+jr);
+        function getjsonbygorup(jsonrow, gorup) {
+            for (var jr in jsonrow) {
+                if (jr + "" == gorup + "") {
+                    alert(jsonrow[jr] + "---" + jr);
                 }
             }
         }
-        
+
         function cccc() {
-            var a=new Array();
+            var a = new Array();
             a.push("aaaaa");
             a.push("bbbb");
             a.push("cccc");

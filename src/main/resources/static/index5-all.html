@@ -15,47 +15,46 @@
 
         function cutrun() {
             //alert(jsonstr);
-            var selectgroup= $("input[name='select_group']:checked").val()+"";
+            var selectgroup = $("input[name='select_group']:checked").val() + "";
 //            console.log(selectgroup);
-            if(selectgroup=="1"){
-                var selectgroupcolumn= $("input[name='radio_group_column']:checked").val();
-                if(typeof(selectgroupcolumn)=="undefined"|| selectgroupcolumn==""){
+            if (selectgroup == "1") {
+                var selectgroupcolumn = $("input[name='radio_group_column']:checked").val();
+                if (typeof(selectgroupcolumn) == "undefined" || selectgroupcolumn == "") {
                     alert("请选择要分组的列名");
                     return;
                 }
-                var map= jsonbyGroupStringArray(jsonObject,selectgroupcolumn)
-     //           tojsondwon(map,fname);
+                var map = jsonbyGroupStringArray(jsonObject, selectgroupcolumn)
+                //           tojsondwon(map,fname);
 //
 //                tojsondwonByOne(map,fname);
-                jsondwon(map,fname);
+                jsondwon(map, fname);
                 return;
 
             }
-            if(selectgroup=="2"){
-                var size=$("#txt_size").val()+"";
+            if (selectgroup == "2") {
+                var size = $("#txt_size").val() + "";
 
-                if(isNaN(size)||size==""){
+                if (isNaN(size) || size == "") {
                     alert("请输入数字");
                     return;
                 }
                 console.log(size);
-                var map= jsonBySizeStringArray(jsonObject,size)
-                jsondwon(map,fname);
+                var map = jsonBySizeStringArray(jsonObject, size)
+                jsondwon(map, fname);
                 return;
             }
 
         }
 
-        function jsondwon(map,fname) {
-            var selectgroup= $("input[name='rad_cut_type']:checked").val()+"";
-            if(selectgroup=="sheetcut"){
-                tojsondwonByOne(map,fname);
+        function jsondwon(map, fname) {
+            var selectgroup = $("input[name='rad_cut_type']:checked").val() + "";
+            if (selectgroup == "sheetcut") {
+                tojsondwonByOne(map, fname);
             }
-            if(selectgroup=="filecut"){
-                tojsondwon(map,fname);
+            if (selectgroup == "filecut") {
+                tojsondwon(map, fname);
             }
         }
-
 
 
     </script>
@@ -69,44 +68,44 @@
 <input type="file" onchange="sendfile(this)"/>
 <div>
     切分方式:
-    <input type="radio" name="rad_cut_type" value="sheetcut" checked="checked" /> 分拆多个sheet
-    <input type="radio" name="rad_cut_type" value="filecut" /> 分拆多个文件
+    <input type="radio" name="rad_cut_type" value="sheetcut" checked="checked"/> 分拆多个sheet
+    <input type="radio" name="rad_cut_type" value="filecut"/> 分拆多个文件
 </div>
 <div id="div_excel_loading" style="display: none">
     正在读取excel，请稍后...
 </div>
 
 <div id="div_tool" style="display: none">
-<div>
-    <input type="radio" name="select_group" onclick="selectgroupradio(this);" value="1"/>分组切割
-
-    <input type="radio" name="select_group" onclick="selectgroupradio(this);"  value="2"/>数量切割
-</div>
-
-<div id="div_value_1" style="display: none">
-    请选择拆分列
-    <div id="div_group_column">
-        <ul>
-            <li>xxx</li>
-            <li>xxx</li>
-            <li>xxx</li>
-
-        </ul>
-    </div>
     <div>
-        <input type="button" value="切一下" onclick="cutrun()">
-    </div>
-</div>
+        <input type="radio" name="select_group" onclick="selectgroupradio(this);" value="1"/>分组切割
 
-<div id="div_value_2" style="display: none">
-    <div>
-    请选择拆分的数量:<input type="text" name="txt_size" id="txt_size"/>
+        <input type="radio" name="select_group" onclick="selectgroupradio(this);" value="2"/>数量切割
     </div>
-    <div>
 
-        <input type="button" value="切一下" onclick="cutrun()">
+    <div id="div_value_1" style="display: none">
+        请选择拆分列
+        <div id="div_group_column">
+            <ul>
+                <li>xxx</li>
+                <li>xxx</li>
+                <li>xxx</li>
+
+            </ul>
+        </div>
+        <div>
+            <input type="button" value="切一下" onclick="cutrun()">
+        </div>
     </div>
-</div>
+
+    <div id="div_value_2" style="display: none">
+        <div>
+            请选择拆分的数量:<input type="text" name="txt_size" id="txt_size"/>
+        </div>
+        <div>
+
+            <input type="button" value="切一下" onclick="cutrun()">
+        </div>
+    </div>
 </div>
 </body>
 </html>

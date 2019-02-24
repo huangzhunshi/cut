@@ -1,9 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>e小切满足各种excel的拆分神器</title>
-<link href="images/main.css" rel="stylesheet" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>e小切满足各种excel的拆分神器</title>
+    <link href="images/main.css" rel="stylesheet" type="text/css"/>
     <script language="JavaScript" src="js/jquery-2.1.1.min.js"></script>
     <script src="js/xlsx.full.min.js"></script>
 
@@ -18,47 +19,46 @@
 
         function cutrun() {
             //alert(jsonstr);
-            var selectgroup= $("input[name='select_group']:checked").val()+"";
+            var selectgroup = $("input[name='select_group']:checked").val() + "";
 //            console.log(selectgroup);
-            if(selectgroup=="1"){
-                var selectgroupcolumn= $("input[name='radio_group_column']:checked").val();
-                if(typeof(selectgroupcolumn)=="undefined"|| selectgroupcolumn==""){
+            if (selectgroup == "1") {
+                var selectgroupcolumn = $("input[name='radio_group_column']:checked").val();
+                if (typeof(selectgroupcolumn) == "undefined" || selectgroupcolumn == "") {
                     alert("请选择要分组的列名");
                     return;
                 }
-                var map= jsonbyGroupStringArray(jsonObject,selectgroupcolumn)
+                var map = jsonbyGroupStringArray(jsonObject, selectgroupcolumn)
                 //           tojsondwon(map,fname);
 //
 //                tojsondwonByOne(map,fname);
-                jsondwon(map,fname);
+                jsondwon(map, fname);
                 return;
 
             }
-            if(selectgroup=="2"){
-                var size=$("#txt_size").val()+"";
+            if (selectgroup == "2") {
+                var size = $("#txt_size").val() + "";
 
-                if(isNaN(size)||size==""){
+                if (isNaN(size) || size == "") {
                     alert("请输入数字");
                     return;
                 }
                 console.log(size);
-                var map= jsonBySizeStringArray(jsonObject,size)
-                jsondwon(map,fname);
+                var map = jsonBySizeStringArray(jsonObject, size)
+                jsondwon(map, fname);
                 return;
             }
 
         }
 
-        function jsondwon(map,fname) {
-            var selectgroup= $("input[name='rad_cut_type']:checked").val()+"";
-            if(selectgroup=="sheetcut"){
-                tojsondwonByOne(map,fname);
+        function jsondwon(map, fname) {
+            var selectgroup = $("input[name='rad_cut_type']:checked").val() + "";
+            if (selectgroup == "sheetcut") {
+                tojsondwonByOne(map, fname);
             }
-            if(selectgroup=="filecut"){
-                tojsondwon(map,fname);
+            if (selectgroup == "filecut") {
+                tojsondwon(map, fname);
             }
         }
-
 
 
     </script>
@@ -66,86 +66,81 @@
 
 <body>
 <div class="top">
-  <div class="tlogo"><img src="images/logo.png" /></div>
-  <div class="ttoptest"><img src="images/toptest.png" /></div>
+    <div class="tlogo"><img src="images/logo.png"/></div>
+    <div class="ttoptest"><img src="images/toptest.png"/></div>
 </div>
 <div class="line0"></div>
 <div class="bgselect">
- <div class="file-box"><input type="file" class="file-btn" onchange="sendfile(this)"/>选择你想要上传的文件</div>
-  <div class="bgstest"> xxx </div>
+    <div class="file-box"><input type="file" class="file-btn" onchange="sendfile(this)"/>选择你想要上传的文件</div>
+    <div class="bgstest"> xxx</div>
 </div>
 <div class="Segmen">
-  <div class="stit">切分方式</div>
+    <div class="stit">切分方式</div>
     <!--<input type="radio" name="rad_cut_type" value="sheetcut" checked="checked" /> 分拆多个sheet-->
     <!--<input type="radio" name="rad_cut_type" value="filecut" /> 分拆多个文件-->
-  <div class="stegm">
-         <div class="male fl" style=" border:1px #ff6600 solid; color:#ff6600; ">
-            <label for="male">
-                <input type="radio" name="rad_cut_type" value="sheetcut" checked="checked" /> 分拆多个seet
-            </label>
+    <div class="stegm">
+        <div class="male fl">
+
+            <input type="radio" name="rad_cut_type" value="sheetcut" checked="checked"/> <!--分拆多个seet-->
+
             <span class="btn active">分拆多个seet</span>
         </div>
         <div class="male fl" style="float:right;">
-            <label for="male">
-                <input type="radio" name="rad_cut_type" value="filecut" />分拆多个文件
-            </label>
+
+            <input type="radio" name="rad_cut_type" value="filecut"/>  <!--分拆多个文件-->
+
             <span class="btn active">分拆多个文件</span>
         </div>
-      <div id="div_tool" style="display: none">
-        <div class="male fl">
-            <label for="male">
-                <input type="radio" name="select_group" onclick="selectgroupradio(this);" value="1"/>分组切割
-            </label>
-            <span class="btn active">分组切割</span>
-        </div>
-        <div class="male fl" style="float:right;">
-            <label for="male">
-                <input type="radio" name="select_group" onclick="selectgroupradio(this);"  value="2"/>数量切割
-            </label>
-            <span class="btn active">数量切割</span>
-        </div>
-      </div>
-    
-  </div>
-  <div class="stit">请选择拆分列</div>
-  <div class="stbanyua">
-      <ul>
-          <li>xxxx</li>
-          <li>xxxx</li>
-          <li>xxxx</li>
-      </ul>
+        <div id="div_tool" style="display: none">
+            <div class="male fl">
 
-      <!--<div class="male fl">-->
-            <!--<label for="male">                        -->
-                <!--<input type="radio" name="sex" >中国国际技术智力合作有限公司-->
-            <!--</label>-->
-            <!--<span class="btn active">中国国际技术智力合作有限公司</span>-->
+                <input type="radio" name="select_group" onclick="selectgroupradio(this);" value="1"/><!--分组切割-->
+
+                <span class="btn active">分组切割</span>
+            </div>
+            <div class="male fl" style="float:right;">
+                <input type="radio" name="select_group" onclick="selectgroupradio(this);" value="2"/><!--数量切割-->
+                <span class="btn active">数量切割</span>
+            </div>
+        </div>
+
+    </div>
+    <div id="div_value_1" style="display: none">
+
+        <div class="stit">请选择拆分列</div>
+        <div class="stbanyua" id="div_group_column">
+            <ul>
+                <li>xxxx</li>
+                <li>xxxx</li>
+                <li>xxxx</li>
+            </ul>
+
+        </div>
+
+        <div class="qibox"><input name="" type="button" value="切一下" class="qbut" onclick="cutrun()"/></div>
+    </div>
+
+    <div id="div_value_2" style="display: none">
+
+        <div class="stit">请选择拆分的数量:<input type="text" name="txt_size" id="txt_size"/></div>
+        <!--<div class="stbanyua" id="div_group_column">-->
+            <!--<ul>-->
+                <!--<li>xxxx</li>-->
+                <!--<li>xxxx</li>-->
+                <!--<li>xxxx</li>-->
+            <!--</ul>-->
+
         <!--</div>-->
-        <!--<div class="male fl" style=" border:1px #ff6600 solid; color:#ff6600; ">-->
-            <!--<label for="male">                        -->
-                <!--<input type="radio" name="sex" >中智服务大厅-->
-            <!--</label>-->
-            <!--<span class="btn active">中智服务大厅</span>-->
-        <!--</div>-->
-        <!--<div class="male fl">-->
-            <!--<label for="male">                        -->
-                <!--<input type="radio" name="sex"  >北京市-->
-            <!--</label>-->
-            <!--<span class="btn active">北京市</span>-->
-        <!--</div>-->
-        <!--<div class="male fl">-->
-            <!--<label for="male">                        -->
-                <!--<input type="radio" name="sex"  >朝阳区-->
-            <!--</label>-->
-            <!--<span class="btn active">朝阳区</span>-->
-        <!--</div>-->
- 
-  </div>
+
+        <div class="qibox"><input name="" type="button" value="切一下" class="qbut" onclick="cutrun()"/></div>
+    </div>
+
+    <div class="bbtot"><img src="images/bbtot.png" width="772" height="234"/></div>
 </div>
-<div class="qibox"><input name="" type="button" value="切一下" class="qbut" /></div>
-<div class="bbtot"><img src="images/bbtot.png" width="772" height="234" /></div>
+
 <div class="lixiwoma">
-   <div>联系我们：<a href="#"><img src="images/icon01.png" width="20" height="20" /></a>&nbsp;<a href="#"><img src="images/icon02.png" width="20" height="20" /></a></div>
+    <div>联系我们：<a href="#"><img src="images/icon01.png" width="20" height="20"/></a>&nbsp;<a href="#"><img
+            src="images/icon02.png" width="20" height="20"/></a></div>
 </div>
 </body>
 </html>

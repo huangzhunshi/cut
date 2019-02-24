@@ -7,9 +7,9 @@
 
     <script language="JavaScript">
         function jsontest() {
-            var packJson  = {
-                "name":"Liza",
-                "password":"123"
+            var packJson = {
+                "name": "Liza",
+                "password": "123"
             };
 
 //            for(var k in packJson ){  //遍历packJson 对象的每个key/value对,k为key
@@ -19,20 +19,20 @@
 // 遍历JSON数组
             var packJson = [
                 {
-                    "name":"Liza",
-                    "password":"123"
+                    "name": "Liza",
+                    "password": "123"
                 },
                 {
-                    "name":"Mike",
-                    "password":"456"
+                    "name": "Mike",
+                    "password": "456"
                 }
             ];
-            for(var i in packJson){  //遍历packJson 数组时，i为索引
+            for (var i in packJson) {  //遍历packJson 数组时，i为索引
                 //alert(packJson[i]);
-                var a='';
-                for(var j in packJson[i]){
+                var a = '';
+                for (var j in packJson[i]) {
                     //a+= '   '+j;
-                   a+='  '+ packJson[i][j]
+                    a += '  ' + packJson[i][j]
                 }
                 alert(a);
             }
@@ -45,12 +45,13 @@
 </head>
 
 <body onload="jsontest()">
-<input type="file" onchange="sendfile(this)" />
+<input type="file" onchange="sendfile(this)"/>
 <div id="zzdemo"></div>
 <script>
     var zzexcel;
+
     function sendfile(obj) {
-        if(!obj.files) {
+        if (!obj.files) {
             return;
         }
         var f = obj.files[0];
@@ -58,22 +59,22 @@
 
         var reader = new FileReader();
         reader.readAsBinaryString(f);
-        reader.onload = function(e) {
+        reader.onload = function (e) {
             var data = e.target.result;
             zzexcel = XLSX.read(data, {
                 type: 'binary'
             });
 //            alert(zzexcel.SheetNames.length);
-            for(var i=0;i<zzexcel.SheetNames.length;i++){
+            for (var i = 0; i < zzexcel.SheetNames.length; i++) {
 
-                var jsonstr=JSON.stringify(XLSX.utils.sheet_to_json(zzexcel.Sheets[zzexcel.SheetNames[i]]));
-                document.getElementById("zzdemo").innerHTML +=jsonstr;
-                var jsonobj=eval('(' + jsonstr + ')');
-              //  alert(jsonobj.length);
-                for(var n in jsonobj){
-                    var a="";
-                    for(var m in jsonobj[n]){
-                        a+=m+"---- "+jsonobj[n][m];
+                var jsonstr = JSON.stringify(XLSX.utils.sheet_to_json(zzexcel.Sheets[zzexcel.SheetNames[i]]));
+                document.getElementById("zzdemo").innerHTML += jsonstr;
+                var jsonobj = eval('(' + jsonstr + ')');
+                //  alert(jsonobj.length);
+                for (var n in jsonobj) {
+                    var a = "";
+                    for (var m in jsonobj[n]) {
+                        a += m + "---- " + jsonobj[n][m];
                     }
                     //alert(a);
                 }
@@ -103,6 +104,7 @@
             URL.revokeObjectURL(obj); //用URL.revokeObjectURL()来释放这个object URL
         }, 100);
     }
+
     var jsono = [{ //测试数据
         "保质期临期预警(天)": "adventLifecycle",
         "商品标题": "title",
@@ -133,7 +135,7 @@
         "这里超过了": 1111.0,
         "保质期(天)": "expDate"
     }];
-    const wopts = { bookType: 'xlsx', bookSST: false, type: 'binary' };//这里的数据是用来定义导出的格式类型
+    const wopts = {bookType: 'xlsx', bookSST: false, type: 'binary'};//这里的数据是用来定义导出的格式类型
     // const wopts = { bookType: 'csv', bookSST: false, type: 'binary' };//ods格式
     // const wopts = { bookType: 'ods', bookSST: false, type: 'binary' };//ods格式
     // const wopts = { bookType: 'xlsb', bookSST: false, type: 'binary' };//xlsb格式
@@ -141,10 +143,11 @@
     // const wopts = { bookType: 'biff2', bookSST: false, type: 'binary' };//xls格式
 
     function downloadExl(data, type) {
-        const wb = { SheetNames: ['Sheet1','Sheet2'], Sheets: {}, Props: {} };
+        const wb = {SheetNames: ['Sheet1', 'Sheet2'], Sheets: {}, Props: {}};
         wb.Sheets['Sheet1'] = XLSX.utils.json_to_sheet(data);//通过json_to_sheet转成单页(Sheet)数据
-        saveAs(new Blob([s2ab(XLSX.write(wb, wopts))], { type: "application/octet-stream" }), "这里是下载的文件名" + '.' + (wopts.bookType=="biff2"?"xls":wopts.bookType));
+        saveAs(new Blob([s2ab(XLSX.write(wb, wopts))], {type: "application/octet-stream"}), "这里是下载的文件名" + '.' + (wopts.bookType == "biff2" ? "xls" : wopts.bookType));
     }
+
     function s2ab(s) {
         if (typeof ArrayBuffer !== 'undefined') {
             var buf = new ArrayBuffer(s.length);

@@ -56,6 +56,7 @@ public class JwtDemo {
 
     public static void main(String[] args){
         String sgin=createJWT("123","yihui","hahaha",1000*60);
+
         System.out.println(sgin);
 
         String jwt="eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMjMiLCJpYXQiOjE1NDQ4OTEzMTgsInN1YiI6ImhhaGFoYSIsImlzcyI6InlpaHVpIiwiZXhwIjoxNTQ0ODkxMzc4fQ.pw8fH7_aCWkQUQCCtD0x5gVFp1b1vvRlBdPE7tS4UBY";

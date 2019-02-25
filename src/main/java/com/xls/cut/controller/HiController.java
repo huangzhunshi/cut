@@ -11,4 +11,9 @@ public class HiController {
         return "hello";
     }
 
+
+    public String postFile(){
+        return "";
+    }
+
 }

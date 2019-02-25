@@ -3,24 +3,24 @@
  * @param jsonStringMap 分组文件
  * @param fname 文件名称
  */
-function tojsondwon(jsonStringMap,fname) {
-    if(fname==""){
+function tojsondwon(jsonStringMap, fname) {
+    if (fname == "") {
         alert("请上传文件");
         return;
     }
     // console.log(jsonStringMap);
-    for(k in jsonStringMap){
-        var linestr=jsonStringMap[k];
-        linestr=linestr.substring(0,linestr.length-1);
+    for (k in jsonStringMap) {
+        var linestr = jsonStringMap[k];
+        linestr = linestr.substring(0, linestr.length - 1);
         //linestr=linestr.replace(/\n/g,"");
-        linestr=linestr.replace(/\s+/g,"");
-        linestr="["+linestr+"]";
+        linestr = linestr.replace(/\s+/g, "");
+        linestr = "[" + linestr + "]";
 
         //console.log(linestr);
 
-        var jsonObject= jQuery.parseJSON(linestr);
+        var jsonObject = jQuery.parseJSON(linestr);
         //console.log(jsonObject);
-        downloadExl(jsonObject,fname+"-"+k);
+        downloadExl(jsonObject, fname + "-" + k);
 
     }
 }
@@ -30,50 +30,51 @@ function tojsondwon(jsonStringMap,fname) {
  * @param jsonStringMap
  * @param fname
  */
-function tojsondwonByOne(jsonStringMap,fname) {
-    if(fname==""){
+function tojsondwonByOne(jsonStringMap, fname) {
+    if (fname == "") {
         alert("请上传文件");
         return;
     }
-    var sheets=[];
+    var sheets = [];
 
-    for(k in jsonStringMap){
+    for (k in jsonStringMap) {
         sheets.push(k);
     }
     // console.log(sheets);
-    const wopts = { bookType: 'xlsx', bookSST: false, type: 'binary' };//这里的数据是用来定义导出的格式类型
-    const wb = { SheetNames: sheets, Sheets: {}, Props: {} };
-    for(k in jsonStringMap){
-        var linestr=jsonStringMap[k];
-        linestr=linestr.substring(0,linestr.length-1);
+    const wopts = {bookType: 'xlsx', bookSST: false, type: 'binary'};//这里的数据是用来定义导出的格式类型
+    const wb = {SheetNames: sheets, Sheets: {}, Props: {}};
+    for (k in jsonStringMap) {
+        var linestr = jsonStringMap[k];
+        linestr = linestr.substring(0, linestr.length - 1);
         //linestr=linestr.replace(/\n/g,"");
-        linestr=linestr.replace(/\s+/g,"");
+        linestr = linestr.replace(/\s+/g, "");
 
-        linestr="["+linestr+"]";
+        linestr = "[" + linestr + "]";
         //console.log(linestr);
-        try{
+        try {
 
-        var jsonObject= jQuery.parseJSON(linestr);
+            var jsonObject = jQuery.parseJSON(linestr);
 
-        wb.Sheets[k] = XLSX.utils.json_to_sheet(jsonObject);//通过json_to_sheet转成单页(Sheet)数据
-        }catch (err){
+            wb.Sheets[k] = XLSX.utils.json_to_sheet(jsonObject);//通过json_to_sheet转成单页(Sheet)数据
+        } catch (err) {
             console.log(err);
             console.log(linestr);
         }
     }
-    saveAs(new Blob([s2ab(XLSX.write(wb, wopts))], { type: "application/octet-stream" }), fname + '-cut.' + (wopts.bookType=="biff2"?"xls":wopts.bookType));
+    saveAs(new Blob([s2ab(XLSX.write(wb, wopts))], {type: "application/octet-stream"}), fname + '-cut.' + (wopts.bookType == "biff2" ? "xls" : wopts.bookType));
 
     return;
 }
 
 
-function downloadExl(data,fname, type) {
-    const wopts = { bookType: 'xlsx', bookSST: false, type: 'binary' };//这里的数据是用来定义导出的格式类型
+function downloadExl(data, fname, type) {
+    const wopts = {bookType: 'xlsx', bookSST: false, type: 'binary'};//这里的数据是用来定义导出的格式类型
 
-    const wb = { SheetNames: ['Sheet1'], Sheets: {}, Props: {} };
+    const wb = {SheetNames: ['Sheet1'], Sheets: {}, Props: {}};
     wb.Sheets['Sheet1'] = XLSX.utils.json_to_sheet(data);//通过json_to_sheet转成单页(Sheet)数据
-    saveAs(new Blob([s2ab(XLSX.write(wb, wopts))], { type: "application/octet-stream" }), fname + '.' + (wopts.bookType=="biff2"?"xls":wopts.bookType));
+    saveAs(new Blob([s2ab(XLSX.write(wb, wopts))], {type: "application/octet-stream"}), fname + '.' + (wopts.bookType == "biff2" ? "xls" : wopts.bookType));
 }
+
 //如果使用 FileSaver.js 就不要同时使用以下函数
 function saveAs(obj, fileName) {//当然可以自定义简单的下载文件实现方式
     var tmpa = document.createElement("a");
@@ -90,14 +91,11 @@ function saveAs(obj, fileName) {//当然可以自定义简单的下载文件实�
  * 下载兼容性 兼容火狐
  * @param obj
  */
-function testclick(obj)
-{
-    if(document.all)
-    {
+function testclick(obj) {
+    if (document.all) {
         obj.click();
     }
-    else
-    {
+    else {
         var evt = document.createEvent("MouseEvents");
         evt.initEvent("click", true, true);
         obj.dispatchEvent(evt);

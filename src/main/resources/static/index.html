@@ -3,7 +3,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>e小切满足各种excel的拆分神器</title>
+    <title>e小切满足各种excel的拆分工具</title>
+    <meta name=”keywords” Content=”excel拆分工具,excel拆分″>
+    <meta name=”description” Content=”excel拆分工具″>
+
     <link href="images/main.css" rel="stylesheet" type="text/css"/>
     <script language="JavaScript" src="js/jquery-2.1.1.min.js"></script>
     <script src="js/xlsx.full.min.js"></script>
@@ -71,14 +74,14 @@
 </div>
 <div class="line0"></div>
 <div class="bgselect">
-    <div class="file-box"><input type="file" class="file-btn" onchange="sendfileUI(this)"/>选择你想要上传的文件</div>
+    <div class="file-box"><input type="file" class="file-btn" onchange="sendfileUI(this)"/>选择你想要拆分的excel文件</div>
     <div class="bgstest" id="fileShowName"> </div>
     <div id="div_excel_loading" style="display: none">
         正在读取excel，请稍后...
     </div>
 </div>
 <div class="Segmen">
-    <div class="stit">文件分拆方式</div>
+    <div class="stit">excel拆分方式</div>
     <!--<input type="radio" name="rad_cut_type" value="sheetcut" checked="checked" /> 分拆多个sheet-->
     <!--<input type="radio" name="rad_cut_type" value="filecut" /> 分拆多个文件-->
     <div class="stegm">
@@ -86,27 +89,27 @@
 
             <input type="radio" name="rad_cut_type" value="sheetcut" checked="checked"/> <!--分拆多个seet-->
 
-            <span class="btn active">分拆多个seet</span>
+            <span class="btn active">拆分多个seet</span>
         </div>
         <div class="male fl" style="float:right;">
 
             <input type="radio" name="rad_cut_type" value="filecut"/>  <!--分拆多个文件-->
 
-            <span class="btn active">分拆多个文件</span>
+            <span class="btn active">拆分多个文件</span>
         </div>
 
         <div id="div_tool" style="display: none">
-            <div class="stit">切分方式</div>
+            <div class="stit">拆分方式</div>
 
             <div class="male fl">
 
                 <input type="radio" name="select_group" onclick="selectgroupradio(this);" value="1"/><!--分组切割-->
 
-                <span class="btn active">分组切分</span>
+                <span class="btn active">分组拆分</span>
             </div>
             <div class="male fl" style="float:right;">
                 <input type="radio" name="select_group" onclick="selectgroupradio(this);" value="2"/><!--数量切割-->
-                <span class="btn active">数量切分</span>
+                <span class="btn active">数量拆分</span>
             </div>
         </div>
 
@@ -146,8 +149,11 @@
 </div>
 
 <div class="lixiwoma">
-    <div>联系我们：<a href="#"><img src="images/icon01.png" width="20" height="20"/></a>&nbsp;<a href="#"><img
-            src="images/icon02.png" width="20" height="20"/></a></div>
+    <!--<div>联系我们：<a href="#"><img src="images/icon01.png" width="20" height="20"/></a>&nbsp;<a href="#"><img-->
+            <!--src="images/icon02.png" width="20" height="20"/></a></div>-->
+
+    <div>联系我们：
+        <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=165085804&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:165085804:41" alt="点击这里给我发消息" title="点击这里给我发消息"/></a>    </div>
 </div>
 </body>
 </html>

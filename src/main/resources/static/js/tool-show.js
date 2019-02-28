@@ -4,14 +4,14 @@
  */
 function selectgroupradio(obj) {
     if (obj.value == "1") {
-        _czc.push(['_trackEvent', '首页', '选择拆分方式', '分组切割','1','select_group']);
+        _czc.push(['_trackEvent', '首页', '分组拆分', '','1','select_group']);
 
         $("#div_value_1").show();
         $("#div_value_2").hide();
         return;
     }
     if (obj.value == "2") {
-        _czc.push(['_trackEvent', '首页', '选择拆分方式', '数量切割','2','select_group']);
+        _czc.push(['_trackEvent', '首页', '数量拆分', '','2','select_group']);
 
         $("#div_value_1").hide();
         $("#div_value_2").show();

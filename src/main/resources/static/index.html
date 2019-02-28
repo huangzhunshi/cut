@@ -20,10 +20,10 @@
     <script language="JavaScript">
         //声明_czc对象:
         var _czc = _czc || [];
-        //绑定siteid，请用您的siteid替换下方"XXXXXXXX"部分
         _czc.push(["_setAccount", "1276338881"]);
 
         function cutrun() {
+            _czc.push(['_trackEvent', '首页', '切一下按钮', '','cutrun','cutrun']);
             //alert(jsonstr);
             var selectgroup = $("input[name='select_group']:checked").val() + "";
 //            console.log(selectgroup);
@@ -90,14 +90,14 @@
     <div class="stegm">
         <div class="male fl">
 
-            <input type="radio" name="rad_cut_type" value="sheetcut" onclick="_czc.push(['_trackEvent', '首页', 'excel拆分方式', '拆分多个seet','sheetcut','rad_cut_type']);
+            <input type="radio" name="rad_cut_type" value="sheetcut" onclick="_czc.push(['_trackEvent', '首页', '拆分多个seet', '','sheetcut','rad_cut_type']);
 " checked="checked"/> <!--分拆多个seet-->
 
             <span class="btn active">拆分多个seet</span>
         </div>
         <div class="male fl" style="float:right;">
 
-            <input type="radio" name="rad_cut_type" value="filecut" onclick="_czc.push(['_trackEvent', '首页', 'excel拆分方式', '拆分多个文件','sheetcut','rad_cut_type']);"/>  <!--分拆多个文件-->
+            <input type="radio" name="rad_cut_type" value="filecut" onclick="_czc.push(['_trackEvent', '首页', '拆分多个文件', '','sheetcut','rad_cut_type']);"/>  <!--分拆多个文件-->
 
             <span class="btn active">拆分多个文件</span>
         </div>

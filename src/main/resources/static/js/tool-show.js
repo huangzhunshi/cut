@@ -4,11 +4,15 @@
  */
 function selectgroupradio(obj) {
     if (obj.value == "1") {
+        _czc.push(['_trackEvent', '首页', '选择拆分方式', '分组切割','1','select_group']);
+
         $("#div_value_1").show();
         $("#div_value_2").hide();
         return;
     }
     if (obj.value == "2") {
+        _czc.push(['_trackEvent', '首页', '选择拆分方式', '数量切割','2','select_group']);
+
         $("#div_value_1").hide();
         $("#div_value_2").show();
     }
@@ -96,7 +100,7 @@ function sendfile(obj) {
  * @param obj input file 对象
  */
 function sendfileUI(obj) {
-
+    _czc.push(['_trackEvent', '首页', '选择excel文件', '默认','默认','file']);
     jsonstr = "";
     jsonObject = null;
     $("#div_tool").hide();
